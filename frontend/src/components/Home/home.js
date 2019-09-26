@@ -3,12 +3,11 @@
 * 
 */
     import React from 'react';
-    import SendMail from '../../containers/Admin/send';
-
+    import './home.css';
     const Home = () => {
         return (
-            <div>
-                <SendMail/>
+            <div className='welcome'>
+               Welcome To Mail sender
             </div>
         );
     };

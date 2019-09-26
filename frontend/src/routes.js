@@ -6,6 +6,8 @@ import User from  './components/UserView/user';
 import FourOFour from  './components/FourOFour/fourofour';
 import AddUser from './containers/Admin/add';
 import EditUser from './containers/Admin/edit';
+import UserContainer from './containers/User/user_container.js';
+
 
 
 
@@ -19,7 +21,7 @@ const Routes = () => {
             <Switch> 
                 <Route path="/users/add" exact  component={ AddUser } /> 
                 <Route path="/users/:id/edit" exact  component={ EditUser } />          
-                <Route path="/users/:id" exact component={ User } />
+                <Route path="/users/:id" exact component={ UserContainer } />
                 <Route path="/users" exact component={ Users } />
                 <Route path="/" exact  component={ Home } />
                 <Route component={FourOFour}/>     

@@ -1,8 +1,11 @@
 import React from 'react';
+import UserContainer from  '../../containers/User/user_container.js';
 
-const User = () => {
+const User = (props) => {
     return(
-        <div>user</div>
+        <div>
+            <UserContainer/>
+        </div>
     )
 }
 

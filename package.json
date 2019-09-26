@@ -1,5 +1,5 @@
 {
-  "name": "final_project-",
+  "name": "send-template-mailer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,11 +20,14 @@
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "cookie-parser": "^1.4.3",
+    "email-templates": "^6.0.2",
     "express": "^4.16.2",
+    "hogan": "^1.0.2",
     "jsonwebtoken": "^8.0.1",
     "moment-js": "^1.1.15",
     "mongoose": "^4.10.8",
     "nodemailer": "^6.3.0",
+    "nodemailer-express-handlebars": "^3.1.0",
     "nodemailer-smtp-transport": "^2.7.4",
     "redux-form": "^8.2.6",
     "redux-thunk": "^2.3.0"

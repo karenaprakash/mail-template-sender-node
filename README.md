@@ -3,14 +3,15 @@ npm run dev
 
 ### server package.json
 npm install concurrently@3.5.1 express@4.16.2 redux-form@8.2.6 redux-thunk@2.3.0 nodemailer@6.3.0 nodemailer-smtp-transport@2.7.4 
-bcrypt@1.0.3 cookie-parser@1.4.3 jsonwebtoken@8.0.1 moment-js@1.1.15 mongoose@4.10.8 --save
+bcrypt@1.0.3 cookie-parser@1.4.3 jsonwebtoken@8.0.1 moment-js@1.1.15 mongoose@4.10.8  nodemailer-express-handlebars --save
 1.  "concurrently": "^3.5.1",
 2.  "express": "^4.16.2",
 3.  "redux-form": "^8.2.6",
 4.  "redux-thunk": "^2.3.0"
 5.  "body-parser" : "^1.18.2"
 6.  "nodemailer" : "^6.3.0"
-7.  "nodemailer-smtp-transport": "^2.7.4",
+7.  "nodemailer-smtp-transport": "^2.7.4", //not working 
+
 
 Allow your account to send mails: for error response code : 534
 https://myaccount.google.com/lesssecureapp
@@ -22,7 +23,7 @@ https://accounts.google.com/DisplayUnlockCaptcha
 10.  "jsonwebtoken": "^8.0.1",
 11.  "moment-js": "^1.1.15",
 12.  "mongoose": "^4.10.8",
-    
+13.  "hogan" : "^1.0.2"
 
 
 
@@ -46,5 +47,3 @@ npm http-proxy-middleware@0.19.1 react-fontawesome@1.6.1 react-redux@7.1.1 redux
     "axios": "^0.19.0",
     "http-proxy-middleware": "^0.19.1",
     "moment-js": "^1.1.15",
-
-
