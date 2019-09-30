@@ -8,7 +8,7 @@ import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 
 
-const SideNavItems = ({user,onHideNav}) => {
+const SideNavItems = ({admin,onHideNav}) => {
 
     const items = [
         {
@@ -31,7 +31,29 @@ const SideNavItems = ({user,onHideNav}) => {
             text : 'Add User',
             link : '/users/add',
             restricted : true
-        }
+        },
+        {
+            type : 'navItem',
+            icon : 'lock',
+            text : 'Login',
+            link : '/login',
+            excluded : true
+        },
+        {
+            type : 'navItem',
+            icon : 'plus',
+            text : 'Signup Admin',
+            link : '/signup',
+            restricted : true
+        },
+        {
+            type : 'navItem',
+            icon : 'lock',
+            text : 'Logout',
+            link : '/logout',
+            restricted : true
+        },
+
     ]
 
     const element = (item,i) => (
@@ -45,13 +67,16 @@ const SideNavItems = ({user,onHideNav}) => {
     
     
     const showItems = () => (
-       
+        admin.login ? 
         items.map((item,i)=>{
-         
-                return element(item,i) 
-        
-        
-        }) 
+            //console.log(!item.restricted)
+                if(admin.login.isAuth){
+                    return !item.excluded ?  element(item,i) : null 
+                }else{
+                    return !item.restricted ? element(item,i) : null 
+                }
+        }):
+        null
     )
 
     return (
@@ -63,7 +88,7 @@ const SideNavItems = ({user,onHideNav}) => {
 
 function mapStateToProps(state){
     return{
-        user : state.user
+        admin : state.users
     }
 }
 

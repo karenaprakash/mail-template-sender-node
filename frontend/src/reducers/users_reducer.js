@@ -27,6 +27,18 @@ export default function(state={},action){
             return { ...state,user:action.payload.doc }   
         case 'DELETE_USER':
             return { ...state,user:action.payload }  
+        case 'ADD_ADMIN_START':
+            return { ...state,admin:action.payload }
+        case 'ADD_ADMIN_SUCCESS':
+            return { ...state,admin:action.payload }
+        case 'ADD_ADMIN_ERROR':
+            return { ...state,admin:action.payload }   
+        case 'CLEAR_ADMIN':
+            return { ...state,admin:action.payload }   
+        case 'ADMIN_LOGIN':
+            return { ...state,login:action.payload }
+        case 'ADMIN_AUTH':
+            return { ...state,login:action.payload }  
         default:
             return state;
     }

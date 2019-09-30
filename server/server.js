@@ -3,6 +3,7 @@
      */
     const express = require('express');
     const bodyParser = require('body-parser');
+    const cookieParser = require('cookie-parser');
     const config = require('./config/config').get(process.env.NODE_ENV);
     const path = require('path')
     const hogan = require('hogan.js');
@@ -12,6 +13,7 @@
      */
     const app = express();
     app.use(bodyParser.json());
+    app.use(cookieParser());
     app.use(express.static('frontend/build'))
 
      /**
@@ -24,10 +26,14 @@
    
       /*----------- Models Start -----------*/
       const { User } = require('./models/user');
+      const { Admin } = require('./models/admin');
       /*----------- Models End -----------*/
 
-
-    /**
+      /*--------  Middleware --------------------------*/
+       const { auth } = require('./middleware/auth');
+  
+ 
+        /**
      * 
      *  Mail ---------------------------------------------  
      * 
@@ -35,6 +41,8 @@
     //send email
      app.post("/api/sendMail",(req,res)=>{
        const id = req.query.id;
+       const email = req.query.email;
+      
         //1.get user data : 
         User.findById(id,(err,doc)=>{
             if(err) return res.status(400).send(err);
@@ -61,8 +69,9 @@
                const compiledTemplate = hogan.compile(template)
 
                // const mailOptions = req.body;   
-               const mailOptions =  {  from: 'prakash.raoinfotech@gmail.com',
-               to:  doc.email,
+               const mailOptions =  {
+               from: 'prakash.raoinfotech@gmail.com',
+               to: email,
                subject: 'Rao Information Technology',
                html : compiledTemplate.render(doc)
                }
@@ -87,6 +96,99 @@
          })
      })
    
+     /**
+      * 
+      * Admin -------------------------------------------
+      * 
+      */
+
+     //SIGNUP : addUser 
+     app.post("/api/signup",(req,res) => {
+        const admin = new Admin(req.body);
+       
+        admin.save((err,doc) => {
+            if(err) return res.json({success:false});
+            console.log(doc)
+            res.status(200).json({
+                success : true,
+                admin : doc
+            })
+        })
+ })
+
+
+  //LOGIN 
+  app.post("/api/login",(req,res) => {
+        const email = req.body.email;
+        const pass = req.body.password;
+        console.log(email + " " + pass)
+        Admin.findOne({ 'email' : email },(err,admin)=> {
+        
+        if(err) return res.json({success:false});
+
+        if(!admin)  return res.json({
+            isAuth : false,
+            message : 'Auth Faild , admin not found.'
+        })
+
+        admin.comparePassword(pass,(err,isMatch) => {
+           
+            admin.comparePassword(req.body.password,(err,isMatch)=>{
+                if(!isMatch) return res.json({
+                    isAuth : false,
+                    message : 'Wrong Password'
+                });
+        
+                admin.generateToken((err,admin) => {
+                if(err) return res.status(400).send(err);
+                res.cookie('auth',admin.token).json({
+                    isAuth : true,
+                    id : admin._id,
+                    email : admin.email,
+                    message : 'Login Successfully.'
+                })
+            })            
+
+        })
+            
+    })
+})
+
+})
+
+
+//admin auth
+app.get("/api/auth",auth,(req,res) => { 
+    console.log(auth)
+    res.json({
+        isAuth : true,
+        id : req.admin._id,
+        email : req.admin.email,
+    })
+})
+
+
+    //GET USER : API FOR USER LOGOUT
+
+    app.get("/api/logout",auth,(req,res)=>{
+        req.admin.deleteToken(req.token,(err,admin)=>{
+            if(err) return res.status(400).send(err);
+            res.sendStatus(200)
+        })
+      
+    })
+
+
+//GET ADMIN : API FOR ADMIN LOGOUT
+
+app.get("/api/logout",auth,(req,res)=>{
+    req.admin.deleteToken(req.token,(err,admin)=>{
+        if(err) return res.status(400).send(err);
+        res.sendStatus(200)
+    })
+  
+})
+
     /**
      * 
      *  User ---------------------------------------------  
@@ -162,6 +264,7 @@
 
 
 
+
     if(process.env.NODE_ENV === 'production'){
         const path  =  require('path');
         app.get('/*',(req,res)=>{
@@ -170,7 +273,7 @@
     }
 
   
-    const port = process.env.PORT || 3002;
+    const port = process.env.PORT || 3003;
     app.listen(port,()=>{
         console.log('SERVER RUNNING.')
     })
