@@ -8,13 +8,10 @@
         
         Admin.findByToken(token,(err,admin)=>{
 
-            
-          
             if (!admin) return res.json({
                 error : true
             })
-
-
+            
             req.token = token;
             req.admin = admin;
 
