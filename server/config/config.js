@@ -4,7 +4,7 @@
 const config = {
    production :{
        SECRET : 'SUPERSECRETPASSWORD123',
-       DATABASE : 'mongodb+srv://Prakask:Prakash@cluster0-qih3q.mongodb.net/shop?retryWrites=true&w=majority'
+       DATABASE : 'mongodb+srv://Prakask:Prakash@cluster0-qih3q.mongodb.net/mailSender?retryWrites=true&w=majority'
    },
    default : {
        SECRET : 'SUPERSECRETPASSWORD123',
