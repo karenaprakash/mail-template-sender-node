@@ -8,7 +8,7 @@ const config = {
    },
    default : {
        SECRET : 'SUPERSECRETPASSWORD123',
-       DATABASE : 'mongodb://localhost:27017/TemplateEmailNode'
+       DATABASE : 'mongodb://192.168.42.135:27017/TemplateEmailNode'
    }
 }
 

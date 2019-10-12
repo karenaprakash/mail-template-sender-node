@@ -20,7 +20,7 @@ const Routes = () => {
     return (
         <Layout>
             <Switch> 
-                <Route path="/signup" exact  component={ Auth(Signup,true) } />
+                <Route path="/signup" exact  component={ Auth(Signup,false) } />
                 <Route path="/logout" exact  component={ Auth(Logout,true) } />
                 <Route path="/login" exact  component={ Auth(Login,false) } />
                 <Route path="/users/add" exact  component={ Auth(AddUser,false) } /> 

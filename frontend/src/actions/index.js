@@ -265,24 +265,24 @@ function signupAdminStart() {
   }
   
   export const signupAdmin = (data) => (dispatch) => {
-    //  console.log(data)
+      console.log(data)
       dispatch(signupAdminStart());
   
       const response = axios.post('/api/signup',data)
       .then(response => {
-         // console.log(response)
+          console.log(response)
           if(response.data.success){
               alert('Admin Register Successfully.')
               dispatch(reset('signupAdminForm'))
               dispatch(signupAdminSuccess(response))
           }else{
               dispatch(signupAdminError('error while Register Admin.'));
-              alert('Error while register Admin.')
+              alert('Error while register Admin 1.')
           }
       })
       .catch((error) => {
           dispatch(signupAdminError(error));
-          alert('error while Register Admin.')
+          alert('error while Register Admin 2.')
       })
   
   }
