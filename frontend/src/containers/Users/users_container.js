@@ -30,9 +30,9 @@
    deleteUser = (id) => {
         this.props.dispatch(deleteUser(id))
     }
-    sendMail = (id) => {
+    sendMail = (id,email) => {
         alert(id)
-        const email = 'prakash.raoinfotech@gmail.com'
+        const email = email
         this.props.dispatch(sendMailWithData(id,email))
     }
     componentWillReceiveProps(nextProps){
@@ -56,7 +56,7 @@
         onClick={() => this.deleteUser(`${item._id}`)}
         ><DeleteIcon/></TableCell>
         <TableCell align="center"
-        onClick={() => this.sendMail(`${item._id}`)}
+        onClick={() => this.sendMail(`${item._id}`,`${item.email}`)}
         ><SendIcon/></TableCell>
 
         </TableRow>
