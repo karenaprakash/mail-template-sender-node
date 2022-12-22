@@ -23,7 +23,7 @@
     "email-templates": "^6.0.2",
     "express": "^4.16.2",
     "hogan": "^1.0.2",
-    "jsonwebtoken": "^8.0.1",
+    "jsonwebtoken": "^9.0.0",
     "moment-js": "^1.1.15",
     "mongoose": "^5.7.4",
     "nodemailer": "^6.3.0",
